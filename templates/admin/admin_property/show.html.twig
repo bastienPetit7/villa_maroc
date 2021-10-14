@@ -1,78 +1,162 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Property{% endblock %}
 
 {% block body %}
-    <h1>Property</h1>
+    
+<div class="row mb-4 mt-3">
+    <div class="col-12 d-flex justify-content-between">
+        <h1>Détail de la propriété</h1>
+        <a href=" {{path('admin_property_edit', {id : property.id})}} " class="btn btn-primary btn-lg d-none d-md-block">Modifier</a>
+    </div>
+</div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ property.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ property.title }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ property.description }}</td>
-            </tr>
-            <tr>
-                <th>ShortDescription</th>
-                <td>{{ property.shortDescription }}</td>
-            </tr>
-            <tr>
-                <th>MainPicture</th>
-                <td>{{ property.mainPicture }}</td>
-            </tr>
-            <tr>
-                <th>Surface</th>
-                <td>{{ property.surface }}</td>
-            </tr>
-            <tr>
-                <th>Rooms</th>
-                <td>{{ property.rooms }}</td>
-            </tr>
-            <tr>
-                <th>Bedrooms</th>
-                <td>{{ property.bedrooms }}</td>
-            </tr>
-            <tr>
-                <th>Bathrooms</th>
-                <td>{{ property.bathrooms }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ property.price }}</td>
-            </tr>
-            <tr>
-                <th>City</th>
-                <td>{{ property.city }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ property.address }}</td>
-            </tr>
-            <tr>
-                <th>Guests</th>
-                <td>{{ property.guests }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ property.type }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ property.createdAt ? property.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="row">
 
-    <a href="{{ path('admin_property_index') }}">back to list</a>
+    <div class="col-md-6 ">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="account" role="tabpanel">
 
-    <a href="{{ path('admin_property_edit', {'id': property.id}) }}">edit</a>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Image principale de la propriété</h5>
+                    </div>
+                    <div class="card-body position-relative d-flex justify-content-center m-md-4 m-2 "style="height:400px;" >
+                        
+                        <img src="{{ asset(property.mainPicture)}}" style="position: absolute;
+                                                                                top: 0;
+                                                                                left: 0;
+                                                                                right: 0;
+                                                                                bottom: 0;
+                                                                                width: 100%;
+                                                                                height: 100%;
+                                                                                object-fit: cover ;" alt="">
 
-    {{ include('admin_property/_delete_form.html.twig') }}
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                            
+                            <h5 class="h3 mb-0">Description</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.description}} 
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                            
+                            <h5 class="h3 mb-0">Short description</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.shortDescription}} 
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 ">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="account" role="tabpanel">
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Nom de la propriété</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.title}} 
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Nombre de piéces</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.rooms}} piéces
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Surface de la propriété</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.surface}} m2
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Prix de la location</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.price | amount}} /semaine
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3 ">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="account" role="tabpanel">
+
+                
+                
+
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Nombre de chambres</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.bedrooms}} chambres
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Nbr de salles de bains</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.bathrooms}} salles de bains
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Nombre de voyageurs</h5>
+                    </div>
+                    <div class="card-body text-center pb-4 p-2 ">
+                        
+                        {{property.guests}} voyageurs
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {# {{ include('admin_property/_delete_form.html.twig') }} #}
 {% endblock %}

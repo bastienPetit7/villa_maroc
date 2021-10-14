@@ -35,7 +35,8 @@ class PropertyType extends AbstractType
                 ]
             ])
             ->add('mainPicture', FileType::class, [
-                'label' => 'Ajouter l\'image principale de la propriété'
+                'label' => 'Ajouter l\'image principale de la propriété',
+                'mapped' => false
             ])
             ->add('surface', IntegerType::class, [
                 'label' => 'Surface en m2'
@@ -66,7 +67,7 @@ class PropertyType extends AbstractType
                 'label' => 'Nombre de voyageurs'
             ])
             ->add('type', ChoiceType::class, [
-                'choices' => Property::TYPE
+                'choices' => $this->getChoices()
             ])
           
         ;
@@ -77,5 +78,15 @@ class PropertyType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Property::class,
         ]);
+    }
+
+    private function getChoices()
+    {
+        $choices = Property::TYPE; 
+        $output = []; 
+        foreach($choices as $k => $v){
+            $output[$v] = $k; 
+        }  
+        return $output;
     }
 }

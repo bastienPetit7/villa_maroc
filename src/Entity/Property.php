@@ -18,8 +18,8 @@ class Property
 {
 
     const TYPE = [
-        'Villa' => 0, 
-        'Appartement' =>1
+        0 => 'Villa', 
+        1 => 'Appartement'
     ]; 
 
     /**
@@ -41,17 +41,11 @@ class Property
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Length(
-     *      min = 12,
-     *      max = 150,
-     *      minMessage = "La description doit faire au minimum {{ limit }} caractères ",
-     *      maxMessage = "La description doit faire au maximum {{ limit }} caractères "
-     * )
      */
     private $shortDescription;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mainPicture;
 
@@ -110,9 +104,9 @@ class Property
      */
     public function prePersist()
     {
-        if(empty($this->created_at))
+        if(empty($this->createdAt))
         {
-            $this->created_at = new DateTime();
+            $this->createdAt = new DateTime();
         }
     }
 
