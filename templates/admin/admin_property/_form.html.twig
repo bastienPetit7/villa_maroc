@@ -1,0 +1,181 @@
+{{ form_start(form) }}
+
+
+<div class="row mb-4 mt-3">
+    <div class="col-12 d-flex justify-content-between">
+        <h1>Ajouter une nouvelle propriété</h1>
+        <button class="btn btn-primary btn-lg d-none d-md-block">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-6 col-xl-6">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="account" role="tabpanel">
+
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Quel nom souhaitez vous donner à votre propriété?</h5>
+                    </div>
+                    <div class="card-body p-5 ">
+                        
+                        {{ form_row(form.title) }}
+
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">De quel type de propriété s'agit il?</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.type) }}
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Ajouter une description complète de la propriété</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.description) }}
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Ajouter une brieve description de la propriété</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.shortDescription) }}
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Décrivez le prix à la semaine</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.price) }}
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Ajouter la photo principale de la propriété</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.mainPicture) }}
+
+                    </div>
+                </div>
+                
+               
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-xl-6">
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="account" role="tabpanel">
+
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Décrivez la ville et l'adresse de la propriété</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.city) }}
+                        {{ form_row(form.address) }}
+
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Combien de piéces comporte la propriété</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.rooms) }}
+                        
+
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Combien de chambres comporte la propriété</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.bedrooms) }}
+                        
+
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Combien de salles de bains comporte la propriété</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.bathrooms) }}
+                        
+
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Quelle surface habitable fait la propriété en m2</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.surface) }}
+                        
+
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        
+                        <h5 class="h3 mb-0">Combien de personnes peut acceuillir la propriété</h5>
+                    </div>
+                    <div class="card-body p-5">
+                        
+                        {{ form_row(form.guests) }}
+                        
+
+
+                    </div>
+                </div>
+
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+<button class="btn btn-primary btn-lg d-block d-md-none">{{ button_label|default('Enregistrer') }}</button>
+
+{{ form_end(form) }}
