@@ -21,7 +21,6 @@
     "dependencies": {
         "-": "0.0.1",
         "@babel/polyfill": "7.12.1",
-        "@ckeditor/ckeditor5-build-classic": "^30.0.0",
         "@fortawesome/fontawesome-free": "5.15.3",
         "@popperjs/core": "^2.10.2",
         "apexcharts": "3.27.2",
