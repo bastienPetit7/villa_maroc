@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Property;
 
 use App\Entity\Property;
 use App\Form\PropertyType;
+use App\MesServices\ImageService;
 use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/property")
- */
+
 class DeletePropertyController extends AbstractController
 {
-  /**
-     * @Route("/{id}", name="admin_property_delete", methods={"POST"})
+    /**
+     * @Route("/admin/property/delete/{id}", name="admin_property_delete", methods={"POST"})
      */
-    public function delete(Request $request, Property $property): Response
+    public function delete(Request $request, Property $property , ImageService $imageService): Response
     {
         if ($this->isCsrfTokenValid('delete'.$property->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            $imageService->supprimerImage($property->getMainPicture()); 
+
             $entityManager->remove($property);
             $entityManager->flush();
         }
