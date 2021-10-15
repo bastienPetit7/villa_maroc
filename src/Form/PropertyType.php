@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Property;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -24,11 +25,11 @@ class PropertyType extends AbstractType
                     'placeholder' => 'ex: Villa de rêve...'
                 ]
             ] )
-            ->add('description', TextareaType::class, [
+            ->add('description', CKEditorType::class, [
                 'label' => 'Déscription de votre propriété', 
                 
             ])
-            ->add('shortDescription', TextareaType::class, [
+            ->add('shortDescription', CKEditorType::class, [
                 'label' => 'Petite déscription de votre propriété', 
                 'attr' => [
                     'placeholder' => 'ex: Villa de rêve au pied du plus beau golf de Marrakech...'
@@ -60,7 +61,7 @@ class PropertyType extends AbstractType
                 'label' => 'Ville de la propriété', 
                 'data' => 'Marrakech'
             ])
-            ->add('address', TextareaType::class, [
+            ->add('address', CKEditorType::class, [
                 'label' => 'Adresse de la propriété'
             ])
             ->add('guests', IntegerType::class, [
