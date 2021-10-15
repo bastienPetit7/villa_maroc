@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class PropertyType extends AbstractType
 {
@@ -35,7 +36,7 @@ class PropertyType extends AbstractType
                     'placeholder' => 'ex: Villa de rêve au pied du plus beau golf de Marrakech...'
                 ]
             ])
-            ->add('mainPicture', FileType::class, [
+            ->add('mainPicture', DropzoneType::class, [
                 'label' => 'Ajouter l\'image principale de la propriété',
                 'mapped' => false
             ])
