@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Property;
 
 use App\Entity\Property;
 use App\Form\PropertyType;
@@ -10,13 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/property")
- */
+
 class ShowPropertyController extends AbstractController
 {
     /**
-     * @Route("/{id}", name="admin_property_show", methods={"GET"})
+     * @Route("/admin/property/show/{id}", name="admin_property_show", methods={"GET"})
      */
     public function show(Property $property): Response
     {

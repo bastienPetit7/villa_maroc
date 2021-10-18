@@ -16,20 +16,21 @@ class ImageService
         $this->parameterBag = $parameterBag;
     }
 
-    public function sauvegarderImage(object $object, object $file)
+    public function sauvegarderMainPicture(object $object, object $file)
     {
-          //Je transforme le nom du fichier
-          $originalName = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
-          $safeName = $this->slugger->slug($originalName);
-          $uniqFileName = $safeName . '-' . uniqid() . '.' . $file->guessExtension();
+         
+        $uniqImageName = $this->stockImage($file);
 
-          //Je bouge le fichier dans le dossier uploads
-          $file->move(
-              $this->parameterBag->get('app_images_directory'),
-              $uniqFileName
-          );
+        $object->setMainPicture('/uploads/' . $uniqImageName);
+    }
 
-          $object->setMainPicture('/uploads/' . $uniqFileName);
+    public function sauvegarderImage(object $object1, object $object2, object $file)
+    {
+        $uniqImageName = $this->stockImage($file);
+
+        $object1->setTitle('/uploads/' . $uniqImageName);
+        $object2->addImage($object1); 
+
     }
 
     public function supprimerImage(string $fileName)
@@ -42,5 +43,21 @@ class ImageService
             
             unlink($pathFile);
         }
+    }
+
+    public function stockImage(object $file)
+    {
+         //Je transforme le nom du fichier
+         $originalName = pathinfo($file->getClientOriginalName(),PATHINFO_FILENAME);
+         $safeName = $this->slugger->slug($originalName);
+         $uniqFileName = $safeName . '-' . uniqid() . '.' . $file->guessExtension();
+
+         //Je bouge le fichier dans le dossier uploads
+         $file->move(
+             $this->parameterBag->get('app_images_directory'),
+             $uniqFileName
+         );
+
+         return $uniqFileName;
     }
 }

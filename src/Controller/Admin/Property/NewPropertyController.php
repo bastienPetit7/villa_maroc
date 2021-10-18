@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Property;
 
+use App\Entity\Image;
 use App\Entity\Property;
 use App\Form\PropertyType;
 use App\MesServices\ImageService;
@@ -11,27 +12,30 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-/**
- * @Route("/admin/property")
- */
+
 class NewPropertyController extends AbstractController
 {
    /**
-     * @Route("/new", name="admin_property_new", methods={"GET","POST"})
+     * @Route("/admin/property/create", name="admin_property_new", methods={"GET","POST"})
      */
     public function new(Request $request, ImageService $imageService): Response
     {
-       
-
         $property = new Property();
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $file = $form->get('mainPicture')->getData();
+            $mainPicture = $form->get('mainPicture')->getData();
+            $images = $form->get('images')->getData(); 
+            
+            $imageService->sauvegarderMainPicture($property,$mainPicture);
 
-            $imageService->sauvegarderImage($property,$file);
+            foreach( $images as $image)
+            {
+                $imageEntity = new Image(); 
+                $imageService->sauvegarderImage($imageEntity, $property, $image);
+            }
 
 
             $entityManager = $this->getDoctrine()->getManager();

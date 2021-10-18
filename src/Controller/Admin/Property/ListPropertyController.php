@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Property;
 
 use App\Entity\Property;
 use App\Form\PropertyType;
@@ -10,13 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/property")
- */
+
 class ListPropertyController extends AbstractController
 {
     /**
-     * @Route("/", name="admin_property_index", methods={"GET"})
+     * @Route("/admin/property/list", name="admin_property_index", methods={"GET"})
      */
     public function index(PropertyRepository $propertyRepository): Response
     {

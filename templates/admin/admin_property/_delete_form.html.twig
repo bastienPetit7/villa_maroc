@@ -1,4 +1,4 @@
-<form method="post" action="{{ path('admin_property_delete', {'id': property.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+<form method="post" class="d-flex justify-content-end" action="{{ path('admin_property_delete', {'id': property.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cette propriété?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ property.id) }}">
-    <button class="btn">Delete</button>
+    <button class="btn btn-danger  text-righ">Supprimer la propriété</button>
 </form>
