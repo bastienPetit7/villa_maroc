@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin\Property;
 
+use App\Entity\Image;
 use App\Entity\Property;
 use App\Form\PropertyType;
 use App\MesServices\ImageService;
@@ -19,17 +20,22 @@ class NewPropertyController extends AbstractController
      */
     public function new(Request $request, ImageService $imageService): Response
     {
-       
-
         $property = new Property();
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $file = $form->get('mainPicture')->getData();
+            $mainPicture = $form->get('mainPicture')->getData();
+            $images = $form->get('images')->getData(); 
+            
+            $imageService->sauvegarderMainPicture($property,$mainPicture);
 
-            $imageService->sauvegarderImage($property,$file);
+            foreach( $images as $image)
+            {
+                $imageEntity = new Image(); 
+                $imageService->sauvegarderImage($imageEntity, $property, $image);
+            }
 
 
             $entityManager = $this->getDoctrine()->getManager();

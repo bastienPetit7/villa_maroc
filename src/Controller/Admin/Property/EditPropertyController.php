@@ -2,14 +2,15 @@
 
 namespace App\Controller\Admin\Property;
 
+use App\Entity\Image;
 use App\Entity\Property;
 use App\Form\PropertyType;
 use App\MesServices\ImageService;
 use App\Repository\PropertyRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
 class EditPropertyController extends AbstractController
@@ -19,18 +20,29 @@ class EditPropertyController extends AbstractController
      */
     public function edit(Request $request, Property $property, ImageService $imageService): Response
     {
-        $ancienneImage = $property->getMainPicture();
-
+        $ancienneMainPicture = $property->getMainPicture();
         $form = $this->createForm(PropertyType::class, $property);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $file = $form->get('mainPicture')->getData();
-            
-            $imageService->sauvegarderImage($property,$file);
+            $mainPicture = $form->get('mainPicture')->getData();
+            if(isset($mainPicture))
+            {
+                $imageService->sauvegarderMainPicture($property,$mainPicture);
+                $imageService->supprimerImage($ancienneMainPicture);
+            }
 
-            $imageService->supprimerImage($ancienneImage);
+
+            $images = $form->get('images')->getData(); 
+            
+           
+
+            foreach( $images as $image)
+            {
+                $imageEntity = new Image(); 
+                $imageService->sauvegarderImage($imageEntity, $property, $image);
+            }
 
             $this->getDoctrine()->getManager()->flush();
 

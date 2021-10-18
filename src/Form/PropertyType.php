@@ -38,7 +38,8 @@ class PropertyType extends AbstractType
             ])
             ->add('mainPicture', DropzoneType::class, [
                 'label' => 'Ajouter l\'image principale de la propriété',
-                'mapped' => false
+                'mapped' => false, 
+                'required' => false
             ])
             ->add('surface', IntegerType::class, [
                 'label' => 'Surface en m2'
@@ -70,6 +71,12 @@ class PropertyType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'choices' => $this->getChoices()
+            ])
+            ->add('images', DropzoneType::class, [
+                'label' => 'Ajouter des images de la propriété',
+                'mapped' => false, 
+                'multiple' => true, 
+                'required' => false
             ])
           
         ;

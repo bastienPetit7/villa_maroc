@@ -111,7 +111,7 @@ class Property
     }
 
     /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="property", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="property", orphanRemoval=true, cascade={"persist"})
      */
     private $images;
 
