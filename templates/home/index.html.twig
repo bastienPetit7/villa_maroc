@@ -1,42 +1,249 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello HomeController!{% endblock %}
+{% extends "base.html.twig" %}
 
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
+{% include "shared/_navbar.html.twig" %}
+
+    <section class="hero-home">
+      <div class="swiper-container hero-slider">
+        <div class="swiper-wrapper dark-overlay">
+
+          {% for property in properties %}
+            
+          <div class="swiper-slide" style="background-image:url( {{asset(property.mainPicture)}} )"></div>
+
+          {% endfor %}
+
+         
+        </div>
+      </div>
+      <div class="container py-6 py-md-7 text-white z-index-20">
+        <div class="row">
+          <div class="col-xl-10">
+
+            <div class="text-center text-lg-start">
+              <p class="subtitle letter-spacing-4 mb-2 text-secondary text-shadow">Prêt pour les vacances?</p>
+              <h1 class="display-3 fw-bold text-shadow">Louer <br> maintenant <br> votre villa </h1>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="py-6 bg-gray-100">
+      <div class="container">
+        <div class="text-center pb-lg-4">
+          <p class="subtitle text-secondary">One-of-a-kind vacation rentals</p>
+          <h2 class="mb-5">Location haut de gamme & sécurisé</h2>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                <svg class="svg-icon text-primary w-2rem h-2rem">
+                  <use xlink:href="#destination-map-1"> </use>
+                </svg>
+              </div>
+              <h3 class="h5">Trouver la villa qui vous convient</h3>
+              <p class="text-muted">One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed in</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                <svg class="svg-icon text-primary w-2rem h-2rem">
+                  <use xlink:href="#pay-by-card-1"> </use>
+                </svg>
+              </div>
+              <h3 class="h5">Réserver en toute confiance</h3>
+              <p class="text-muted">The bedding was hardly able to cover it and seemed ready to slide off any moment. His many legs, pit</p>
+            </div>
+          </div>
+          <div class="col-lg-4 mb-3 mb-lg-0 text-center">
+            <div class="px-0 px-lg-3">
+              <div class="icon-rounded bg-primary-light mb-3">
+                <svg class="svg-icon text-primary w-2rem h-2rem">
+                  <use xlink:href="#heart-1"> </use>
+                </svg>
+              </div>
+              <h3 class="h5">Profiter de vos vacances </h3>
+              <p class="text-muted">His room, a proper human room although a little too small, lay peacefully between its four familiar </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-6 bg-gray-100"> 
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-md-8">
+          <p class="subtitle text-secondary">Des propriétés de haut standing</p>
+          <h2>Au bord d'un golf</h2>
+        </div>
+        <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="blog.html">
+              Voir toutes les propriétés<i class="fas fa-angle-double-right ms-2"></i></a></div>
+      </div>
+      <div class="row">
+        <!-- blog item-->
+        {% for property in properties %}
+
+        <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
+          <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src=" {{asset(property.mainPicture)}} "  alt="..."/></a>
+            <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"> {{property.title}} </a>
+              <h5 class="my-2"><a class="text-dark" href="post.html"> {{property.shortDescription | raw}} </a></h5>
+              
+              <p class="my-2 text-muted text-sm"> {{property.description | raw}} </p><a class="btn btn-link ps-0" href="post.html">Voir plus<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+        
+        
+      </div>
     </div>
-  </div>
-</nav>
-{% endblock %}
+    </section>
+
+    <!-- Divider Section-->
+    <section class="py-7 position-relative dark-overlay"><img class="bg-image" src="uploads/wolfgang-hasselmann-jZlsIFoedDE-unsplash.jpg" alt="">
+      <div class="container">
+        <div class="overlay-content text-white py-lg-5">
+          <h3 class="display-3 fw-bold text-serif text-shadow mb-5">Prêt pour vos prochaines vacances?</h3><a class="btn btn-light" href="category-rooms.html">Réserver maintenant</a>
+        </div>
+      </div>
+    </section>
+    <section class="py-7">
+      <div class="container">
+        <div class="text-center">
+          <p class="subtitle text-primary">Temoignages</p>
+          <h2 class="mb-5">Ce que nos clients pensent de nous</h2>
+        </div>
+        <!-- Slider main container-->
+        <div class="swiper-container testimonials-slider testimonials">
+          <!-- Additional required wrapper-->
+          <div class="swiper-wrapper pt-2 pb-5">
+            <!-- Slides-->
+            <div class="swiper-slide p-4">
+              <div class="testimonial card rounded-3 shadow border-0">
+                <div class="testimonial-avatar"><img class="avatar avatar-lg p-1" src="img/avatar/avatar-3.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide p-4">
+              <div class="testimonial card rounded-3 shadow border-0">
+                <div class="testimonial-avatar"><img class="avatar avatar-lg p-1" src="img/avatar/avatar-3.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide p-4">
+              <div class="testimonial card rounded-3 shadow border-0">
+                <div class="testimonial-avatar"><img class="avatar avatar-lg p-1" src="img/avatar/avatar-3.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide p-4">
+              <div class="testimonial card rounded-3 shadow border-0">
+                <div class="testimonial-avatar"><img class="avatar avatar-lg p-1" src="img/avatar/avatar-3.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide p-4">
+              <div class="testimonial card rounded-3 shadow border-0">
+                <div class="testimonial-avatar"><img class="avatar avatar-lg p-1" src="img/avatar/avatar-3.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide p-4">
+              <div class="testimonial card rounded-3 shadow border-0">
+                <div class="testimonial-avatar"><img class="avatar avatar-lg p-1" src="img/avatar/avatar-3.jpg" alt="..."></div>
+                <div class="text">
+                  <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                  <p class="testimonial-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever</p><strong>Jessica Watson</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination">     </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Instagram-->
+    <section>
+      <div class="container-fluid px-0">
+        <div class="swiper-container instagram-slider">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-1.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-2.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-3.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-4.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-5.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-6.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-7.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-8.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-9.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-10.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-11.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-12.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-13.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-14.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-10.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-11.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-12.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-13.jpg" alt=" "></a></div>
+            <div class="swiper-slide overflow-hidden"><a href="#"><img class="img-fluid hover-scale" src="img/instagram/instagram-14.jpg" alt=" "></a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% include "shared/_footer.html.twig" %}
+
+    <!-- JavaScript files-->
+    <script>
+      // ------------------------------------------------------- //
+      //   Inject SVG Sprite - 
+      //   see more here 
+      //   https://css-tricks.com/ajaxing-svg-sprite/
+      // ------------------------------------------------------ //
+      function injectSvgSprite(path) {
+      
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+          var div = document.createElement("div");
+          div.className = 'd-none';
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }    
+      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
+      // use your own URL in production, please :)
+      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
+      //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
+      injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
+      
+    </script>
+
+    {% endblock %}
+
+ 
+
+

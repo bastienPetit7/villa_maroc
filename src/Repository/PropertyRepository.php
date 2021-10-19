@@ -19,6 +19,15 @@ class PropertyRepository extends ServiceEntityRepository
         parent::__construct($registry, Property::class);
     }
 
+    public function findAllLimited3()
+    {
+        return $this->createQueryBuilder('p')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Property[] Returns an array of Property objects
     //  */

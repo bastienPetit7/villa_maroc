@@ -12,8 +12,8 @@
     {{ include('admin/admin_property/_form.html.twig', {'button_label': 'Enregister les modifications'}) }}
 
 
+    {{ encore_entry_script_tags('handleImage') }}
+
 {% endblock %}
 
-{% block javascripts %}
-    <script src=" {{asset('js/deleteImage.js')}} "></script>
-{% endblock %}
+
