@@ -25,11 +25,8 @@ $(function () {
                 '<div style="padding:0 5px;">\
                             <span style="font-weight:bold">' +
                 date +
-                '</span>\
-                            <div class="day-subtitle">$' +
-                Math.round(Math.random() * 999) +
-                "</div>\
-                        </div>"
+                
+                        "</div>"
             );
         },
         beforeShowDay: function (t) {

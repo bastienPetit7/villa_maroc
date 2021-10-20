@@ -20,7 +20,7 @@ class AmountExtension extends AbstractExtension
     {
         $finalValue = $value / 100;
 
-        $finalValue = number_format($finalValue,2,',',' ');
+        $finalValue = number_format($finalValue,0,',',' ');
 
         return $finalValue . ' €';
     }

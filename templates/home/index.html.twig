@@ -4,6 +4,8 @@
 
 {% include "shared/_navbar.html.twig" %}
 
+
+
     <section class="hero-home">
       <div class="swiper-container hero-slider">
         <div class="swiper-wrapper dark-overlay">
@@ -30,6 +32,9 @@
         </div>
       </div>
     </section>
+
+  
+
     <section class="py-6 bg-gray-100">
       <div class="container">
         <div class="text-center pb-lg-4">
@@ -75,34 +80,34 @@
     </section>
 
     <section class="py-6 bg-gray-100"> 
-    <div class="container">
-      <div class="row mb-5">
-        <div class="col-md-8">
-          <p class="subtitle text-secondary">Des propriétés de haut standing</p>
-          <h2>Au bord d'un golf</h2>
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-8">
+            <p class="subtitle text-secondary">Des propriétés de haut standing</p>
+            <h2>Au bord d'un golf</h2>
+          </div>
+          <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href=" {{path('list_property')}} ">
+                Voir toutes les propriétés<i class="fas fa-angle-double-right ms-2"></i></a></div>
         </div>
-        <div class="col-md-4 d-md-flex align-items-center justify-content-end"><a class="text-muted text-sm" href="blog.html">
-              Voir toutes les propriétés<i class="fas fa-angle-double-right ms-2"></i></a></div>
-      </div>
-      <div class="row">
-        <!-- blog item-->
-        {% for property in properties %}
+        <div class="row">
+          <!-- blog item-->
+          {% for property in properties %}
 
-        <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
-          <div class="card shadow border-0 h-100"><a href="post.html"><img class="img-fluid card-img-top" src=" {{asset(property.mainPicture)}} "  alt="..."/></a>
-            <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"> {{property.title}} </a>
-              <h5 class="my-2"><a class="text-dark" href="post.html"> {{property.shortDescription | raw}} </a></h5>
-              
-              <p class="my-2 text-muted text-sm"> {{property.description | raw}} </p><a class="btn btn-link ps-0" href="post.html">Voir plus<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+          <div class="col-lg-4 col-sm-6 mb-4 hover-animate">
+            <div class="card shadow border-0 h-100"><a href="{{ path('show_property', {id : property.id})}}"><img class="img-fluid card-img-top" src=" {{asset(property.mainPicture)}} " style="object-fit:cover; height: 250px; "  alt="..."/></a>
+              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="#"> {{property.title}} </a>
+                <h5 class="my-2"><a class="text-dark" href="{{ path('show_property', {id : property.id})}}"> {{property.shortDescription | raw}} </a></h5>
+                
+                <p class="my-2 text-muted text-sm"> {{property.shortDescription | raw}} </p><a class="btn btn-link ps-0" href=" {{ path('show_property', {id : property.id})}} ">Voir plus<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+              </div>
             </div>
           </div>
-        </div>
 
-        {% endfor %}
-        
-        
+          {% endfor %}
+          
+          
+        </div>
       </div>
-    </div>
     </section>
 
     <!-- Divider Section-->
@@ -215,32 +220,8 @@
 
     {% include "shared/_footer.html.twig" %}
 
-    <!-- JavaScript files-->
-    <script>
-      // ------------------------------------------------------- //
-      //   Inject SVG Sprite - 
-      //   see more here 
-      //   https://css-tricks.com/ajaxing-svg-sprite/
-      // ------------------------------------------------------ //
-      function injectSvgSprite(path) {
-      
-          var ajax = new XMLHttpRequest();
-          ajax.open("GET", path, true);
-          ajax.send();
-          ajax.onload = function(e) {
-          var div = document.createElement("div");
-          div.className = 'd-none';
-          div.innerHTML = ajax.responseText;
-          document.body.insertBefore(div, document.body.childNodes[0]);
-          }
-      }    
-      // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-      // use your own URL in production, please :)
-      // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-      //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
-      injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg'); 
-      
-    </script>
+  <!-- jQuery-->
+        <script src="{{asset('front_theme/vendor/jquery/jquery.min.js')}}"></script>
 
     {% endblock %}
 

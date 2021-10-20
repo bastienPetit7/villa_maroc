@@ -1,26 +1,23 @@
 <?php
 
-namespace App\Controller\Admin\Property;
+namespace App\Controller\Front;
 
-use App\Entity\Property;
-use App\Form\PropertyType;
 use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 class ListPropertyController extends AbstractController
 {
     /**
-     * @Route("/admin/property/list", name="admin_property_index", methods={"GET"})
+     * @Route("/list/property", name="list_property" )
      */
     public function index(PropertyRepository $propertyRepository): Response
     {
-        
-        return $this->render('admin/admin_property/list.html.twig', [
-            'properties' => $propertyRepository->findAll(),
+        $properties = $propertyRepository->findAll(); 
+
+        return $this->render('properties/list_properties.html.twig', [
+            'properties' => $properties
         ]);
     }
 }
