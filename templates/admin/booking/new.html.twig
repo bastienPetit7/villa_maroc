@@ -1,0 +1,32 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Hello CreateBookingController!{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card p-4">
+                <div class="card-header">
+                    <h2>Nouvelle réservation</h2>
+                </div>
+                <div class="card-body">
+                        {{form_start(form)}}
+                            {{form_row(form.title)}}
+                            {{form_row(form.property)}}
+                            {{form_row(form.start)}}
+                            {{form_row(form.end)}}
+                            {{form_row(form.description)}}
+                            
+                            <div class="d-flex justify-content-end w-100">
+                                <button type="submit" class="btn btn-primary ">Enregistrer</button>
+                            </div>
+                        {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+{% endblock %}

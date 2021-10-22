@@ -6,6 +6,8 @@
 
 "use strict";
 
+var unavailableDate = ["2021-10-25", "2021-10-26", "2021-10-27"]
+
 $(function () {
     var singleMonth = false;
     if ($(window).width() < 767) {
@@ -24,16 +26,18 @@ $(function () {
             return (
                 '<div style="padding:0 5px;">\
                             <span style="font-weight:bold">' +
-                date +
-                
-                        "</div>"
+                date + '</div>'
             );
         },
         beforeShowDay: function (t) {
-            var valid = !(t.getDay() == 0 || t.getDay() == 6); //disable saturday and sunday
-            var _class = "";
-            var _tooltip = valid ? "" : "Booked";
-            return [valid, _class, _tooltip];
+            let ymd = t.getFullYear() +"-"+ (t.getMonth() + 1) +"-"+ t.getDate()
+
+        if($. inArray(ymd, unavailableDate) == -1){
+            return [true, ""]
+        }else {
+            console.log('hello');
+            return [false, "", "Booked"]
+        }
         },
         customOpenAnimation: function (cb) {
             $(this).fadeIn(300, cb);
@@ -42,6 +46,8 @@ $(function () {
             $(this).fadeOut(300, cb);
         },
     };
+
+    
     $("#bookingDate")
         .dateRangePicker(dateRangeConfig)
         .bind("datepicker-opened", function () {

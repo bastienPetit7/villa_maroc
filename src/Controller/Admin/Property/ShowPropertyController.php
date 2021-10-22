@@ -18,7 +18,29 @@ class ShowPropertyController extends AbstractController
      */
     public function show(Property $property): Response
     {
+        $events = $property->getBookings()->getValues(); 
+
+        $reservations = []; 
+
+        foreach($events as $event)
+        {
+            $reservations[] = [
+                'id' => $event->getId(), 
+                'title' => $event->getTitle(),
+                'start' => $event->getStart()->format('Y-m-d'), 
+                'end' => $event->getEnd()->format('Y-m-d'), 
+                'description' => $event->getDescription(),
+                'backgroundColor' => $event->getBackgroundColor(),
+                'textColor' => $event->getTextColor(),
+                // 'display' => 'background'
+
+            ];
+        }
+
+        $data = json_encode($reservations);
+
         return $this->render('admin/admin_property/show.html.twig', [
+            'data' => $data,
             'property' => $property,
         ]);
     }

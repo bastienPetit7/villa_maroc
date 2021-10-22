@@ -115,9 +115,35 @@ class Property
      */
     private $images;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Booking::class, mappedBy="property")
+     */
+    private $bookings;
+
+    /**
+     * @ORM\Column(type="string", length=7, nullable=true)
+     */
+    private $bgColorCalendar;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
     }
 
     public function getId(): ?int
@@ -319,6 +345,72 @@ class Property
                 $image->setProperty(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Booking[]
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): self
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings[] = $booking;
+            $booking->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): self
+    {
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getProperty() === $this) {
+                $booking->setProperty(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getBgColorCalendar(): ?string
+    {
+        return $this->bgColorCalendar;
+    }
+
+    public function setBgColorCalendar(?string $bgColorCalendar): self
+    {
+        $this->bgColorCalendar = $bgColorCalendar;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }
