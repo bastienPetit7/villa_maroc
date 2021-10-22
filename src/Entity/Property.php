@@ -120,6 +120,21 @@ class Property
      */
     private $bookings;
 
+    /**
+     * @ORM\Column(type="string", length=7, nullable=true)
+     */
+    private $bgColorCalendar;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $latitude;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $longitude;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -360,6 +375,42 @@ class Property
                 $booking->setProperty(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBgColorCalendar(): ?string
+    {
+        return $this->bgColorCalendar;
+    }
+
+    public function setBgColorCalendar(?string $bgColorCalendar): self
+    {
+        $this->bgColorCalendar = $bgColorCalendar;
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

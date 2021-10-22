@@ -3,6 +3,7 @@
 namespace App\Controller\Admin\Booking;
 
 use App\Repository\BookingRepository;
+use App\Repository\PropertyRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,12 +15,11 @@ class ListBookingController extends AbstractController
     /**
      * @Route("admin/list/bookind", name="list_booking")
      */
-    public function index(BookingRepository $bookingRepository): Response
+    public function index(BookingRepository $bookingRepository, PropertyRepository $propertyRepository): Response
     {
         $events = $bookingRepository->findAll(); 
 
-      
-
+        
         $reservations = []; 
 
         foreach($events as $event)
@@ -31,7 +31,7 @@ class ListBookingController extends AbstractController
                 'end' => $event->getEnd()->format('Y-m-d'), 
                 'description' => $event->getDescription(),
                 'backgroundColor' => $event->getBackgroundColor(),
-                'textColor' => $event->getTextColor(),
+                
                 
 
             ];
@@ -41,7 +41,8 @@ class ListBookingController extends AbstractController
 
         return $this->render('admin/booking/list.html.twig', [
             'bookings' => $bookingRepository->findAllDesc(), 
-            'data' => $data
+            'data' => $data, 
+            'properties' => $propertyRepository->findAll()
         ]);
     }
 }

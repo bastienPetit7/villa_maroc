@@ -3,17 +3,20 @@
 namespace App\Form;
 
 use App\Entity\Property;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\UX\Dropzone\Form\DropzoneType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\UX\Dropzone\Form\DropzoneType;
 
 class PropertyType extends AbstractType
 {
@@ -78,6 +81,11 @@ class PropertyType extends AbstractType
                 'multiple' => true, 
                 'required' => false
             ])
+            ->add('bgColorCalendar', ColorType::class, [
+                
+            ])
+            ->add('latitude', NumberType::class)
+            ->add('longitude', NumberType::class)
           
         ;
     }

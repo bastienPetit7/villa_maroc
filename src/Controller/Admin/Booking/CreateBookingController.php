@@ -24,10 +24,14 @@ class CreateBookingController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            $property = $form->get('property')->getData(); 
             
+            $booking->setBackgroundColor($property->getBgColorCalendar());
 
             $em->persist($booking);
             $em->flush();
+
+            return $this->redirectToRoute('list_booking', [], Response::HTTP_SEE_OTHER);
         }
 
 

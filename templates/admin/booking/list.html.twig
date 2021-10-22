@@ -50,8 +50,31 @@
                                 </table>
                             </div>
                             <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="card mt-5">
+                                        <div class="card-header">
+                                            <h3>Légende Propriétés</h3>
+                                        </div>
+                                        <div class="card-body">
+                                            {% for property in properties %}
+                                            <div class="d-flex m-2">
+                                                <div style=" width:30px;
+                                                            height:20px;
+                                                            background-color: {{property.bgColorCalendar}}; 
+                                                            border: 1px solid #333333;
+                                                            border-radius: 5px;
+                                                "></div>
+                                                <span class="mx-3 d-block">{{property.title}}</span>
+                                            </div>
+                                                
+                                            {% endfor %}
+                                        
+                                        </div>
+                                    </div>
+                                </div>
                             
-                                <div class="col-md-8 offset-md-2">
+                                <div class="col-md-8 ">
                                 
                                     <div class="card mt-5">
                                         <div class="card-header">
