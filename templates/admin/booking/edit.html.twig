@@ -1,0 +1,44 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Edit Booking{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('admin_property_index') }}" class="mb-4 d-block"><i class="align-middle fas fa-arrow-alt-circle-left"></i> <span class="align-middle">Revenir à la liste</span></a>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card p-4">
+
+            {{ include('admin/booking/_delete_form.html.twig') }}
+
+                <div class="card-header d-flex justify-content-between ">
+                    {% if app.request.attributes.get('_route') == 'edit_booking' %}
+
+                        <h2>Modifier la réservation</h2>
+
+                    {% else %}
+                        
+                        <h2>Nouvelle réservation</h2>
+
+                    {% endif %}
+                    <div class="">
+                            <button type="submit" class="btn btn-primary ">Enregistrer</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                        {{form_start(form)}}
+                            {{form_row(form.title)}}
+                            {{form_row(form.property)}}
+                            {{form_row(form.start)}}
+                            {{form_row(form.end)}}
+                            {{form_row(form.description)}}
+                            
+                            
+                        {{form_end(form)}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

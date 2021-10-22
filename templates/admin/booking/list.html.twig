@@ -1,0 +1,98 @@
+{% extends "base_admin.html.twig" %}
+
+{% block title %}Booking index{% endblock %}
+
+{% block body %}
+
+            {# <pre>
+                {{ dump(bookings) }}
+            </pre> #}
+
+
+
+                <div class="main">
+                    <main class="content">
+                        <div class="container-fluid p-0">
+
+                            <div class="card flex-fill mb-4">
+                                <div class="card-header">
+                                    
+                                    <h5 class="card-title mb-0">Réservations</h5>
+                                </div>
+                                <table id="datatables-dashboard-projects" class="table table-striped my-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th class="d-none d-xl-table-cell">Start Date</th>
+                                            <th class="d-none d-xl-table-cell">End Date</th>
+                                            <th class="d-none d-xl-table-cell">propriété</th>
+                                            <th>Status</th>
+                                            <th class="d-none d-md-table-cell">Assignee</th>
+                                            <th class=""></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for booking in bookings %}
+
+                                            <tr>
+                                                <td>{{booking.title}} </td>
+                                                <td class="d-none d-xl-table-cell">{{booking.start | date('d/m/Y')}} </td>
+                                                <td class="d-none d-xl-table-cell">{{booking.end | date('d/m/Y')}}</td>
+                                                <td class="d-none d-xl-table-cell">{{booking.property}}</td>
+                                                <td><span class="badge bg-success">Done</span></td>
+                                                <td class="d-none d-md-table-cell">User name</td>
+                                                <td class=""><a href="{{path('edit_booking', {id: booking.id})}}" class="btn btn-primary btn-sm">Modifier</a></td>
+                                            </tr>
+                                            
+                                        {% endfor %}
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                            
+                                <div class="col-md-8 offset-md-2">
+                                
+                                    <div class="card mt-5">
+                                        <div class="card-header">
+                                            <h5 class="h3">Planing de réservation</h5>
+                                        </div>
+                                        <div class="card-body">
+                            
+                                            <div id="calendar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            
+
+{% endblock %}
+
+{% block js %}
+
+        <script>
+
+        window.onload= () => {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', 
+        themeSystem: 'bootstrap',
+        locale: 'fr',
+        headerToolbar: {
+                start: 'prev,next',
+                center: 'title',
+                end: 'dayGridMonth'
+        }, 
+        events: {{data | raw}}, 
+        editable: true, 
+        eventResizableFromStart: true, 
+        });
+        calendar.render();
+        };
+
+        </script>
+
+{% endblock %}

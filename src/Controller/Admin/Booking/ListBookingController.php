@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\Booking;
 
 use App\Repository\BookingRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class AdminHomeController extends AbstractController
+
+class ListBookingController extends AbstractController
 {
+
     /**
-     * @Route("/admin/home", name="admin_home")
+     * @Route("admin/list/bookind", name="list_booking")
      */
     public function index(BookingRepository $bookingRepository): Response
     {
-
         $events = $bookingRepository->findAll(); 
 
       
@@ -31,12 +32,16 @@ class AdminHomeController extends AbstractController
                 'description' => $event->getDescription(),
                 'backgroundColor' => $event->getBackgroundColor(),
                 'textColor' => $event->getTextColor(),
+                
 
             ];
         }
 
         $data = json_encode($reservations);
 
-        return $this->render('admin/admin_home/index.html.twig', compact('data'));
+        return $this->render('admin/booking/list.html.twig', [
+            'bookings' => $bookingRepository->findAllDesc(), 
+            'data' => $data
+        ]);
     }
 }

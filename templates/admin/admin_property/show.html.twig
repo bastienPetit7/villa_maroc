@@ -69,7 +69,16 @@
                         </div>
                     </div>
                 </div>
-						
+                {# Calendar #}
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="h3">Planing de réservation</h5>
+                    </div>
+                    <div class="card-body">
+        
+                        <div id="calendar"></div>
+                    </div>
+                </div>
                 
             </div>
         </div>
@@ -214,4 +223,28 @@
 
 
     {# {{ include('admin_property/_delete_form.html.twig') }} #}
+{% endblock %}
+{% block js %}
+
+        <script>
+
+        window.onload= () => {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', 
+        locale: 'fr',
+        headerToolbar: {
+                start: 'prev,next',
+                center: 'title',
+                end: 'dayGridMonth'
+        }, 
+        events: {{data | raw}}, 
+        // editable: true, 
+        // eventResizableFromStart: true, 
+        });
+        calendar.render();
+        };
+
+        </script>
+
 {% endblock %}

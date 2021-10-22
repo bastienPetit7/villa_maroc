@@ -6,7 +6,37 @@
 
         <h1 class="text-center">Bienvenu dans l'espace administrateur de Villa Maroc</h1>
 
-                    
-                
+       
+     <div class="row">
+        <div class="col-md-6">
+        
+                <div id="calendar"></div>
+        </div>
+     </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+        <script>
+
+        window.onload= () => {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', 
+        locale: 'fr',
+        headerToolbar: {
+                start: 'prev,next',
+                center: 'title',
+                end: 'dayGridMonth'
+        }, 
+        events: {{data | raw}}, 
+        editable: true, 
+        eventResizableFromStart: true, 
+        });
+        calendar.render();
+        };
+
+        </script>
 
 {% endblock %}
