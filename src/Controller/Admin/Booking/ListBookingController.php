@@ -28,12 +28,12 @@ class ListBookingController extends AbstractController
                 'id' => $event->getId(), 
                 'title' => $event->getTitle(),
                 'start' => $event->getStart()->format('Y-m-d'), 
-                'end' => $event->getEnd()->format('Y-m-d'), 
+                'end' => $event->getEnd()->format('Y-m-d')."T12:00:00", 
                 'description' => $event->getDescription(),
                 'backgroundColor' => $event->getBackgroundColor(),
+                'allDay' => false, 
+                // 'displayEventEnd' => false
                 
-                
-
             ];
         }
 

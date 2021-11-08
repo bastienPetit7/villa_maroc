@@ -6,7 +6,8 @@
 
 "use strict";
 
-var unavailableDate = ["2021-10-25", "2021-10-26", "2021-10-27"]
+
+// var unavailableDate = ["2021-10-25", "2021-10-26", "2021-10-27"]
 
 $(function () {
     var singleMonth = false;
@@ -32,7 +33,7 @@ $(function () {
         beforeShowDay: function (t) {
             let ymd = t.getFullYear() +"-"+ (t.getMonth() + 1) +"-"+ t.getDate()
 
-        if($. inArray(ymd, unavailableDate) == -1){
+        if($. inArray(ymd, arrResult) == -1){
             return [true, ""]
         }else {
             console.log('hello');
