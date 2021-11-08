@@ -187,7 +187,7 @@
             <hr class="my-4">
 
 
-            <form class="form" id="booking-form" method="get" action="{{path('')}} " autocomplete="off">
+            <form class="form" id="booking-form" method="get" autocomplete="off">
               <div class="mb-4">
                 <label class="form-label" for="bookingDate">Your stay *</label>
                 <div class="datepicker-container datepicker-container-right">
@@ -316,6 +316,7 @@
         <script>
         //   "use strict";
 
+            // Fonction qui va nous retourner un tableau des jours entre deux dates (start) (end) 
             function getDaysArray(start, end) {
                 for(var arr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
                     arr.push(new Date(dt));
@@ -324,23 +325,30 @@
             };
 
 
-            // console.log(daylist.toISOString().split("T")[0]);
             function getDataDaysArray(){
                 let arrResult = [];
-                let resas = [];
                 for (let i = 1; i <= {{bookings | length}}; i++) {
                 
+                // J'initialise les variables de mes inputs (hidden) afin de récupérer leurs values
                 let inputResaStart = document.getElementById(`resaStart${i}`)
                 let inputResaEnd = document.getElementById(`resaEnd${i}`)
 
+                // Je transforme les dates récupérer en string => "2021-10-27" par exemple
                 let toStringResaStart = JSON.stringify(inputResaStart.value)
                 let toStringResaEnd = JSON.stringify(inputResaEnd.value)
                 
-                
+                // Se console Log va me renvoyer => "2021-10-27" "2021-10-30" [c-a-d date de début et date de fin de la réservation]
                 console.log(toStringResaStart, toStringResaEnd );
+
+                // Je récupére la list de chaque jour entre les deux dates start et end via la fonction getDaysArray;
                 var daylist = getDaysArray(new Date(toStringResaStart),new Date(toStringResaEnd));
+
+                console.log("daylist ="+ daylist); 
+
+                // Je modifie chaque index de daylist afin d'avoir une date au format '30-10-2021' au lieu de "Sat Nov 13 2021 00:00:00 GMT+0100 (heure normale d’Europe centrale)";
+                // Je push chaque date transformé dans le tableau arrResult.
                 daylist.forEach((day) => {
-                    arrResult.push(day.toLocaleString().replace(', 00:00:00', '').replace('/', '-').replace('/', '-'))
+                    arrResult.push(day.toLocaleString().replace(', 00:00:00', '').replace('/', '-').replace('/', '-'));
                 })
             
                 }
@@ -351,7 +359,8 @@
                 
             }
 
-
+            // Je crée la variable unavailableDate qui sera le arrResult retourner de la fonction getDataDaysArray;
+            // Je vais en suite pouvoir passer cette variable au niveau de la clef beforeShowDay de datePicker ref: https://api.jqueryui.com/datepicker/#option-beforeShowDay
              var unavailableDate = getDataDaysArray();  
 
             $(function () {
@@ -375,17 +384,23 @@
                             date + '</div>'
                         );
                     },
+                    // La fonction beforeShow Day prend un objet dateTime en argument.
                     beforeShowDay: function (t) {
+
+                        // J'initialise la variable jour pour que les jours inf à 10 prennent un zéro devant afin de respecter le format des date de datePicker
                         let jour = t.getDate(); 
                         if(t.getDate() < 10){
                             jour =  `0${jour}`
                         }
+                        // Création de la variable dmy au format "01-11-2021" 
                         let dmy = jour +"-"+ (t.getMonth() + 1) +"-"+ t.getFullYear()
+                        // Pour chaque date créer par datePicker à partir de la startDate (jour actuel) on regardera si la date en création est présente dans mon tableau unavailableDate
+                        // Si oui on retournera [false, "", "Booked"] (false => le jour n'est pas disponible // "Booked" => popup tooltip pour la date)
                     if($. inArray(dmy, unavailableDate) == -1){
-                        console.log('ciao');
+                        console.log('free');
                         return [true, ""]
                     }else {
-                        console.log('hello');
+                        console.log('booked');
                         return [false, "", "Booked"]
                     }
                     },

@@ -2,21 +2,20 @@
   "entrypoints": {
     "app": {
       "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/vendors-node_modules_core-js_internals_an-instance_js-node_modules_core-js_internals_check-co-a900cf.js",
-        "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_apexcharts_dist_apexc-33ea51.js",
-        "http://localhost:8080/build/app.js"
+        "/build/runtime.c3e9a731.js",
+        "/build/454.b3ad3276.js",
+        "/build/439.133ce8d4.js",
+        "/build/app.74ddac10.js"
       ],
       "css": [
-        "http://localhost:8080/build/app.css"
+        "/build/app.f199715c.css"
       ]
     },
     "handleImage": {
       "js": [
-        "http://localhost:8080/build/runtime.js",
-        "http://localhost:8080/build/vendors-node_modules_core-js_internals_an-instance_js-node_modules_core-js_internals_check-co-a900cf.js",
-        "http://localhost:8080/build/vendors-node_modules_core-js_modules_es_array_from_js-node_modules_core-js_modules_es_array_i-2b1b72.js",
-        "http://localhost:8080/build/handleImage.js"
+        "/build/runtime.c3e9a731.js",
+        "/build/454.b3ad3276.js",
+        "/build/handleImage.7edc2508.js"
       ]
     }
   }
