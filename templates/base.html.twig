@@ -16,7 +16,7 @@
     <!-- swiper-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/css/swiper.min.css">
     <!-- Magnigic Popup-->
-    <link rel="stylesheet" href="{{asset('front_theme/vendor/magnific-popup/magnific-popup.min.css')}}">
+    <link rel="stylesheet" href="{{asset('front_theme/vendor/magnific-popup/magnific-popup.css')}}">
     <!-- Leaflet Maps-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="">
 
@@ -33,6 +33,7 @@
   </head>
     <body style="padding-top: 72px;">
 
+        {% include "shared/_navbar.html.twig" %}
 
         {% block body %}
         
@@ -72,12 +73,12 @@
         
         <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
         <script src="{{asset('front_theme/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+        <!-- Bootstrap Select-->
+        <script src="{{asset('front_theme/vendor/bootstrap-select/js/bootstrap-select.min.js')}}"></script>
         <!-- Magnific Popup - Lightbox for the gallery-->
         <script src="{{asset('front_theme/vendor/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
         <!-- Smooth scroll-->
         <script src="{{asset('front_theme/vendor/smooth-scroll/smooth-scroll.polyfills.min.js')}}"></script>
-        <!-- Bootstrap Select-->
-        <script src="{{asset('front_theme/vendor/bootstrap-select/js/bootstrap-select.min.js')}}"></script>
         <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
         <script src="{{asset('front_theme/vendor/object-fit-images/ofi.min.js')}}"></script>
         <!-- Swiper Carousel                       -->

@@ -3,40 +3,67 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+
+ <div class="container-fluid px-3">
+      <div class="row min-vh-100">
+        <div class="col-md-8 col-lg-6 col-xl-5 d-flex align-items-center">
+          <div class="w-100 py-5 px-md-5 px-xxl-6 position-relative">
+            <div class="mb-5"><img class="img-fluid mb-3" src="img/logo-square.svg" alt="..." style="max-width: 4rem;">
+              <h2>Re-bonjour</h2>
+            </div>
+            <form class="form-validate" method="post">
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            {% if app.user %}
+                <div class="mb-3">
+                    Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                </div>
+            {% endif %}
+
+              <div class="mb-4">
+                <label for="inputEmail">Email</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+              </div>
+              <div class="mb-4">
+                <div class="row">
+                  <div class="col">
+                    <label class="form-label" for="inputPassword"> Mot de passe</label>
+                  </div>
+                  <div class="col-auto"><a class="form-text small text-primary" href="#">Mot de passe oublié?</a></div>
+                </div>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+              </div>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+              
+              <!-- Submit-->
+              <div class="d-grid">
+                <button class="btn btn-lg btn-primary" type="submit">Se connecter</button>
+              </div>
+              <hr class="my-3 hr-text letter-spacing-2" data-content="OR">
+              <div class="d-grid gap-2">
+                <button class="btn btn btn-outline-primary btn-social"><i class="fa-2x fa-facebook-f fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Facebook</span></button>
+                <button class="btn btn btn-outline-muted btn-social"><i class="fa-2x fa-google fab btn-social-icon"> </i>Connect <span class="d-none d-sm-inline">with Google</span></button>
+              </div>
+              <hr class="my-4">
+              <p class="text-center"><small class="text-muted text-center">Vous n'avez pas de compte? <a href="{{path('app_register')}}">Créer un compte</a></small></p>
+            </form>
+            <a class="close-absolute me-md-5 me-xl-6 pt-5" href="{{path('home')}} "> 
+                <svg class="svg-icon w-3rem h-3rem">
+                    <use xlink:href="#close-1"> </use>
+                </svg>
+            </a>
+          </div>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
+        <div class="col-md-4 col-lg-6 col-xl-7 d-none d-md-block">
+          <!-- Image-->
+          <div class="bg-cover h-100 me-n3" style="background-image: url(img/photo/photo-1497436072909-60f360e1d4b1.jpg);"></div>
         </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+      </div>
+    </div>
 {% endblock %}
