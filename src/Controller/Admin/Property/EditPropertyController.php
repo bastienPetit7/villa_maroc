@@ -46,6 +46,8 @@ class EditPropertyController extends AbstractController
 
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'La propiétée a bien été modifiée');
+
             return $this->redirectToRoute('admin_property_index', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -21,7 +21,7 @@ class DeleteBookingController extends AbstractController
             $entityManager->remove($booking);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'La réservation a bien été supprimée');
         return $this->redirectToRoute('list_booking', [], Response::HTTP_SEE_OTHER );
     }
 }

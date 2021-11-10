@@ -26,6 +26,8 @@ class EditBookingController extends AbstractController
 
 
             $em->flush();
+            $this->addFlash('success', 'La réservation a bien été modifiée');
+            return $this->redirectToRoute('list_booking', [], Response::HTTP_SEE_OTHER);
         }
 
 

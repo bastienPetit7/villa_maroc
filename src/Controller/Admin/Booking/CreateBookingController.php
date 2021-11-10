@@ -31,6 +31,8 @@ class CreateBookingController extends AbstractController
             $em->persist($booking);
             $em->flush();
 
+            $this->addFlash('success', 'La réservation a bien été créée');
+
             return $this->redirectToRoute('list_booking', [], Response::HTTP_SEE_OTHER);
         }
 

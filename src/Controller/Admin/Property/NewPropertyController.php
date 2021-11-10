@@ -42,6 +42,8 @@ class NewPropertyController extends AbstractController
             $entityManager->persist($property);
             $entityManager->flush();
 
+            $this->addFlash('success', 'La propiétée a bien été ajouté');
+
             return $this->redirectToRoute('admin_property_index', [], Response::HTTP_SEE_OTHER);
         }
 

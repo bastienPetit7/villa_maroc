@@ -27,6 +27,7 @@ class DeletePropertyController extends AbstractController
             $entityManager->remove($property);
             $entityManager->flush();
         }
+        $this->addFlash('success', 'La propiétée a bien été supprimée');
 
         return $this->redirectToRoute('admin_property_index', [], Response::HTTP_SEE_OTHER);
     }
